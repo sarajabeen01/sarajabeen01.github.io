@@ -40,4 +40,211 @@
     gap: 1rem; margin-bottom: 2rem;
   }
 
-  .stat-box { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding
+  .stat-box { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1.2rem; text-align: center; }
+  .stat-box .num { font-size: 2rem; font-weight: bold; color: var(--accent); }
+  .stat-box .label { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 0.3rem; }
+
+  .main { display: grid; grid-template-columns: 1fr 1.6fr; gap: 1.5rem; align-items: start; }
+
+  .form-card, .list-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; }
+
+  .card-title { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--border); }
+
+  label { display: block; font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.4rem; margin-top: 1rem; }
+  label:first-of-type { margin-top: 0; }
+
+  input, select, textarea { width: 100%; background: #111; border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-size: 0.9rem; padding: 0.6rem 0.8rem; font-family: inherit; outline: none; transition: border-color 0.3s; }
+  input:focus, select:focus, textarea:focus { border-color: var(--accent); }
+  textarea { resize: vertical; min-height: 70px; }
+  select option { background: #1a1a1a; }
+
+  .btn-submit { margin-top: 1.2rem; width: 100%; padding: 0.75rem; background: var(--accent); color: #0f0f0f; border: none; border-radius: 6px; font-size: 0.9rem; font-weight: 600; letter-spacing: 1px; cursor: pointer; transition: opacity 0.3s; }
+  .btn-submit:hover { opacity: 0.85; }
+
+  .filters { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+  .filter-btn { padding: 0.35rem 0.9rem; border-radius: 20px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-size: 0.78rem; cursor: pointer; transition: all 0.3s; }
+  .filter-btn.active, .filter-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(200,169,110,0.08); }
+
+  .bug-list { display: flex; flex-direction: column; gap: 0.8rem; }
+
+  .bug-item { background: #111; border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.2rem; transition: border-color 0.3s; animation: slideIn 0.3s ease; }
+  @keyframes slideIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+  .bug-item:hover { border-color: rgba(200,169,110,0.4); }
+
+  .bug-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.5rem; }
+  .bug-title { font-size: 0.95rem; font-weight: 600; color: var(--text); flex: 1; }
+
+  .badge { font-size: 0.68rem; padding: 0.2rem 0.6rem; border-radius: 20px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap; }
+  .badge-critical { background: rgba(224,82,82,0.15); color: var(--critical); border: 1px solid rgba(224,82,82,0.3); }
+  .badge-major { background: rgba(224,154,82,0.15); color: var(--major); border: 1px solid rgba(224,154,82,0.3); }
+  .badge-minor { background: rgba(82,168,224,0.15); color: var(--minor); border: 1px solid rgba(82,168,224,0.3); }
+
+  .bug-meta { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.6rem; }
+  .bug-desc { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.8rem; line-height: 1.5; }
+
+  .bug-bottom { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; }
+
+  .status-select { width: auto; font-size: 0.75rem; padding: 0.25rem 0.5rem; border-radius: 20px; cursor: pointer; }
+  .status-open { border-color: var(--open) !important; color: var(--open) !important; }
+  .status-inprogress { border-color: var(--inprogress) !important; color: var(--inprogress) !important; }
+  .status-resolved { border-color: var(--resolved) !important; color: var(--resolved) !important; }
+
+  .btn-delete { background: transparent; border: 1px solid rgba(224,82,82,0.3); color: var(--critical); border-radius: 6px; padding: 0.25rem 0.7rem; font-size: 0.75rem; cursor: pointer; transition: all 0.3s; }
+  .btn-delete:hover { background: rgba(224,82,82,0.1); }
+
+  .empty { text-align: center; color: var(--muted); font-size: 0.9rem; padding: 2rem 0; }
+
+  @media (max-width: 700px) { .main { grid-template-columns: 1fr; } body { padding: 1rem; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🐛 Bug Tracker</h1>
+  <p>SQA Project — Sara Jabeen | sarajabeen01.github.io</p>
+</header>
+
+<div class="stats">
+  <div class="stat-box"><div class="num" id="totalCount">0</div><div class="label">Total Bugs</div></div>
+  <div class="stat-box"><div class="num" id="openCount">0</div><div class="label">Open</div></div>
+  <div class="stat-box"><div class="num" id="progressCount">0</div><div class="label">In Progress</div></div>
+  <div class="stat-box"><div class="num" id="resolvedCount">0</div><div class="label">Resolved</div></div>
+  <div class="stat-box"><div class="num" id="criticalCount">0</div><div class="label">Critical</div></div>
+</div>
+
+<div class="main">
+  <div class="form-card">
+    <div class="card-title">Report a Bug</div>
+    <label>Bug Title</label>
+    <input type="text" id="bugTitle" placeholder="e.g. Login button not working" />
+    <label>Module / Page</label>
+    <input type="text" id="bugModule" placeholder="e.g. Login Page, Dashboard" />
+    <label>Severity</label>
+    <select id="bugSeverity">
+      <option value="Critical">🔴 Critical</option>
+      <option value="Major">🟠 Major</option>
+      <option value="Minor">🔵 Minor</option>
+    </select>
+    <label>Description</label>
+    <textarea id="bugDesc" placeholder="Describe the bug — what happened, what was expected..."></textarea>
+    <label>Steps to Reproduce</label>
+    <textarea id="bugSteps" placeholder="1. Go to login page&#10;2. Click submit&#10;3. No error shown"></textarea>
+    <button class="btn-submit" onclick="addBug()">Report Bug</button>
+  </div>
+
+  <div class="list-card">
+    <div class="card-title">Bug Reports</div>
+    <div class="filters">
+      <button class="filter-btn active" onclick="filterBugs('All', this)">All</button>
+      <button class="filter-btn" onclick="filterBugs('Open', this)">Open</button>
+      <button class="filter-btn" onclick="filterBugs('In Progress', this)">In Progress</button>
+      <button class="filter-btn" onclick="filterBugs('Resolved', this)">Resolved</button>
+      <button class="filter-btn" onclick="filterBugs('Critical', this)">Critical</button>
+      <button class="filter-btn" onclick="filterBugs('Major', this)">Major</button>
+      <button class="filter-btn" onclick="filterBugs('Minor', this)">Minor</button>
+    </div>
+    <div class="bug-list" id="bugList">
+      <div class="empty">No bugs reported yet. Report your first bug! 🎯</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let bugs = [];
+  let currentFilter = 'All';
+  let idCounter = 1;
+
+  function addBug() {
+    const title = document.getElementById('bugTitle').value.trim();
+    const module = document.getElementById('bugModule').value.trim();
+    const severity = document.getElementById('bugSeverity').value;
+    const desc = document.getElementById('bugDesc').value.trim();
+    const steps = document.getElementById('bugSteps').value.trim();
+
+    if (!title) { alert('Please enter a bug title!'); return; }
+    if (!module) { alert('Please enter the module/page name!'); return; }
+
+    const bug = {
+      id: idCounter++, title, module, severity, desc, steps,
+      status: 'Open',
+      date: new Date().toLocaleDateString('en-PK', { day: '2-digit', month: 'short', year: 'numeric' })
+    };
+
+    bugs.unshift(bug);
+    clearForm();
+    renderBugs();
+    updateStats();
+  }
+
+  function clearForm() {
+    document.getElementById('bugTitle').value = '';
+    document.getElementById('bugModule').value = '';
+    document.getElementById('bugDesc').value = '';
+    document.getElementById('bugSteps').value = '';
+  }
+
+  function updateStatus(id, newStatus) {
+    const bug = bugs.find(b => b.id === id);
+    if (bug) { bug.status = newStatus; renderBugs(); updateStats(); }
+  }
+
+  function deleteBug(id) {
+    bugs = bugs.filter(b => b.id !== id);
+    renderBugs();
+    updateStats();
+  }
+
+  function filterBugs(filter, btn) {
+    currentFilter = filter;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderBugs();
+  }
+
+  function renderBugs() {
+    const list = document.getElementById('bugList');
+    let filtered = bugs;
+    if (currentFilter === 'Open') filtered = bugs.filter(b => b.status === 'Open');
+    else if (currentFilter === 'In Progress') filtered = bugs.filter(b => b.status === 'In Progress');
+    else if (currentFilter === 'Resolved') filtered = bugs.filter(b => b.status === 'Resolved');
+    else if (currentFilter === 'Critical') filtered = bugs.filter(b => b.severity === 'Critical');
+    else if (currentFilter === 'Major') filtered = bugs.filter(b => b.severity === 'Major');
+    else if (currentFilter === 'Minor') filtered = bugs.filter(b => b.severity === 'Minor');
+
+    if (filtered.length === 0) {
+      list.innerHTML = '<div class="empty">No bugs found for this filter. 🎯</div>';
+      return;
+    }
+
+    list.innerHTML = filtered.map(bug => `
+      <div class="bug-item">
+        <div class="bug-top">
+          <div class="bug-title">#${bug.id} — ${bug.title}</div>
+          <span class="badge badge-${bug.severity.toLowerCase()}">${bug.severity}</span>
+        </div>
+        <div class="bug-meta">📍 ${bug.module} &nbsp;·&nbsp; 📅 ${bug.date}</div>
+        ${bug.desc ? `<div class="bug-desc">📝 ${bug.desc}</div>` : ''}
+        ${bug.steps ? `<div class="bug-desc">🔁 <strong>Steps:</strong> ${bug.steps}</div>` : ''}
+        <div class="bug-bottom">
+          <select class="status-select status-${bug.status.replace(' ','').toLowerCase()}"
+            onchange="updateStatus(${bug.id}, this.value)">
+            <option ${bug.status==='Open'?'selected':''}>Open</option>
+            <option ${bug.status==='In Progress'?'selected':''}>In Progress</option>
+            <option ${bug.status==='Resolved'?'selected':''}>Resolved</option>
+          </select>
+          <button class="btn-delete" onclick="deleteBug(${bug.id})">Delete</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function updateStats() {
+    document.getElementById('totalCount').textContent = bugs.length;
+    document.getElementById('openCount').textContent = bugs.filter(b => b.status === 'Open').length;
+    document.getElementById('progressCount').textContent = bugs.filter(b => b.status === 'In Progress').length;
+    document.getElementById('resolvedCount').textContent = bugs.filter(b => b.status === 'Resolved').length;
+    document.getElementById('criticalCount').textContent = bugs.filter(b => b.severity === 'Critical').length;
+  }
+</script>
+</body>
+</html>
