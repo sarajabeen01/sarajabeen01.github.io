@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test Case Writer | Sara Jabeen</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0f0f0f; --card: #1a1a1a; --border: rgba(200,169,110,0.2);
+    --accent: #c8a96e; --text: #f0ece4; --muted: #888880;
+    --pass: #52c07a; --fail: #e05252; --pending: #e0c052;
+  }
+  body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); padding: 2rem; }
+  header { text-align: center; margin-bottom: 2rem; }
+  header h1 { font-size: 2rem; color: var(--accent); margin-bottom: 0.3rem; }
+  header p { color: var(--muted); font-size: 0.85rem; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+  .stat-box { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center; }
+  .stat-box .num { font-size: 1.8rem; font-weight: bold; color: var(--accent); }
+  .stat-box .label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+  .main { display: grid; grid-template-columns: 1fr 1.6fr; gap: 1.5rem; align-items: start; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; }
+  .card-title { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--border); }
+  label { display: block; font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.4rem; margin-top: 0.9rem; }
+  label:first-of-type { margin-top: 0; }
+  input, select, textarea { width: 100%; background: #111; border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-size: 0.88rem; padding: 0.55rem 0.8rem; font-family: inherit; outline: none; transition: border-color 0.3s; }
+  input:focus, select:focus, textarea:focus { border-color: var(--accent); }
+  textarea { resize: vertical; min-height: 65px; }
+  select option { background: #1a1a1a; }
+  .btn { margin-top: 1.2rem; width: 100%; padding: 0.75rem; background: var(--accent); color: #0f0f0f; border: none; border-radius: 6px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: opacity 0.3s; }
+  .btn:hover { opacity: 0.85; }
+  .filters { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+  .filter-btn { padding: 0.3rem 0.85rem; border-radius: 20px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-size: 0.75rem; cursor: pointer; transition: all 0.3s; }
+  .filter-btn.active, .filter-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(200,169,110,0.08); }
+  .tc-list { display: flex; flex-direction: column; gap: 0.8rem; }
+  .tc-item { background: #111; border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.2rem; animation: slideIn 0.3s ease; }
+  @keyframes slideIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+  .tc-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.5rem; }
+  .tc-title { font-size: 0.92rem; font-weight: 600; flex: 1; }
+  .badge { font-size: 0.68rem; padding: 0.2rem 0.6rem; border-radius: 20px; font-weight: 600; text-transform: uppercase; white-space: nowrap; }
+  .badge-Functional { background: rgba(82,192,122,0.15); color: var(--pass); border: 1px solid rgba(82,192,122,0.3); }
+  .badge-UI { background: rgba(200,169,110,0.15); color: var(--accent); border: 1px solid rgba(200,169,110,0.3); }
+  .badge-Security { background: rgba(224,82,82,0.15); color: var(--fail); border: 1px solid rgba(224,82,82,0.3); }
+  .badge-Performance { background: rgba(82,168,224,0.15); color: #52a8e0; border: 1px solid rgba(82,168,224,0.3); }
+  .tc-meta { font-size: 0.76rem; color: var(--muted); margin-bottom: 0.5rem; }
+  .tc-section { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.3rem; line-height: 1.5; }
+  .tc-section strong { color: var(--accent); }
+  .tc-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 0.8rem; }
+  .status-select { width: auto; font-size: 0.75rem; padding: 0.25rem 0.5rem; border-radius: 20px; cursor: pointer; }
+  .status-Pass { border-color: var(--pass) !important; color: var(--pass) !important; }
+  .status-Fail { border-color: var(--fail) !important; color: var(--fail) !important; }
+  .status-Pending { border-color: var(--pending) !important; color: var(--pending) !important; }
+  .btn-delete { background: transparent; border: 1px solid rgba(224,82,82,0.3); color: var(--fail); border-radius: 6px; padding: 0.25rem 0.7rem; font-size: 0.75rem; cursor: pointer; transition: all 0.3s; }
+  .btn-delete:hover { background: rgba(224,82,82,0.1); }
+  .empty { text-align: center; color: var(--muted); font-size: 0.9rem; padding: 2rem 0; }
+  @media (max-width: 700px) { .main { grid-template-columns: 1fr; } body { padding: 1rem; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📋 Test Case Writer</h1>
+  <p>SQA Project — Sara Jabeen | sarajabeen01.github.io</p>
+</header>
+
+<div class="stats">
+  <div class="stat-box"><div class="num" id="totalCount">0</div><div class="label">Total Cases</div></div>
+  <div class="stat-box"><div class="num" id="passCount">0</div><div class="label">Pass</div></div>
+  <div class="stat-box"><div class="num" id="failCount">0</div><div class="label">Fail</div></div>
+  <div class="stat-box"><div class="num" id="pendingCount">0</div><div class="label">Pending</div></div>
+</div>
+
+<div class="main">
+  <div class="card">
+    <div class="card-title">Write Test Case</div>
+    <label>Test Case Title</label>
+    <input type="text" id="tcTitle" placeholder="e.g. Verify login with valid credentials" />
+    <label>Module / Page</label>
+    <input type="text" id="tcModule" placeholder="e.g. Login Page" />
+    <label>Test Type</label>
+    <select id="tcType">
+      <option value="Functional">✅ Functional</option>
+      <option value="UI">🎨 UI</option>
+      <option value="Security">🔒 Security</option>
+      <option value="Performance">⚡ Performance</option>
+    </select>
+    <label>Preconditions</label>
+    <input type="text" id="tcPre" placeholder="e.g. User must be registered" />
+    <label>Test Steps</label>
+    <textarea id="tcSteps" placeholder="1. Go to login page&#10;2. Enter valid email&#10;3. Enter valid password&#10;4. Click Login"></textarea>
+    <label>Expected Result</label>
+    <textarea id="tcExpected" placeholder="e.g. User should be redirected to dashboard"></textarea>
+    <button class="btn" onclick="addTC()">Add Test Case</button>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Test Cases</div>
+    <div class="filters">
+      <button class="filter-btn active" onclick="filterTC('All', this)">All</button>
+      <button class="filter-btn" onclick="filterTC('Pass', this)">Pass</button>
+      <button class="filter-btn" onclick="filterTC('Fail', this)">Fail</button>
+      <button class="filter-btn" onclick="filterTC('Pending', this)">Pending</button>
+      <button class="filter-btn" onclick="filterTC('Functional', this)">Functional</button>
+      <button class="filter-btn" onclick="filterTC('UI', this)">UI</button>
+      <button class="filter-btn" onclick="filterTC('Security', this)">Security</button>
+    </div>
+    <div class="tc-list" id="tcList">
+      <div class="empty">No test cases yet. Write your first one! 📋</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let testCases = [];
+  let currentFilter = 'All';
+  let idCounter = 1;
+
+  function addTC() {
+    const title = document.getElementById('tcTitle').value.trim();
+    const module = document.getElementById('tcModule').value.trim();
+    const type = document.getElementById('tcType').value;
+    const pre = document.getElementById('tcPre').value.trim();
+    const steps = document.getElementById('tcSteps').value.trim();
+    const expected = document.getElementById('tcExpected').value.trim();
+
+    if (!title) { alert('Please enter a test case title!'); return; }
+    if (!module) { alert('Please enter the module name!'); return; }
+    if (!steps) { alert('Please enter test steps!'); return; }
+    if (!expected) { alert('Please enter expected result!'); return; }
+
+    const tc = {
+      id: idCounter++, title, module, type, pre, steps, expected,
+      status: 'Pending',
+      date: new Date().toLocaleDateString('en-PK', { day: '2-digit', month: 'short', year: 'numeric' })
+    };
+
+    testCases.unshift(tc);
+    clearForm();
+    renderTC();
+    updateStats();
+  }
+
+  function clearForm() {
+    document.getElementById('tcTitle').value = '';
+    document.getElementById('tcModule').value = '';
+    document.getElementById('tcPre').value = '';
+    document.getElementById('tcSteps').value = '';
+    document.getElementById('tcExpected').value = '';
+  }
+
+  function updateStatus(id, newStatus) {
+    const tc = testCases.find(t => t.id === id);
+    if (tc) { tc.status = newStatus; renderTC(); updateStats(); }
+  }
+
+  function deleteTC(id) {
+    testCases = testCases.filter(t => t.id !== id);
+    renderTC(); updateStats();
+  }
+
+  function filterTC(filter, btn) {
+    currentFilter = filter;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderTC();
+  }
+
+  function renderTC() {
+    const list = document.getElementById('tcList');
+    let filtered = testCases;
+    if (['Pass','Fail','Pending'].includes(currentFilter)) filtered = testCases.filter(t => t.status === currentFilter);
+    else if (['Functional','UI','Security','Performance'].includes(currentFilter)) filtered = testCases.filter(t => t.type === currentFilter);
+
+    if (filtered.length === 0) {
+      list.innerHTML = '<div class="empty">No test cases found. 📋</div>';
+      return;
+    }
+
+    list.innerHTML = filtered.map(tc => `
+      <div class="tc-item">
+        <div class="tc-top">
+          <div class="tc-title">TC-${tc.id}: ${tc.title}</div>
+          <span class="badge badge-${tc.type}">${tc.type}</span>
+        </div>
+        <div class="tc-meta">📍 ${tc.module} · 📅 ${tc.date}</div>
+        ${tc.pre ? `<div class="tc-section"><strong>Precondition:</strong> ${tc.pre}</div>` : ''}
+        <div class="tc-section"><strong>Steps:</strong> ${tc.steps}</div>
+        <div class="tc-section"><strong>Expected:</strong> ${tc.expected}</div>
+        <div class="tc-bottom">
+          <select class="status-select status-${tc.status}"
+            onchange="updateStatus(${tc.id}, this.value)">
+            <option ${tc.status==='Pending'?'selected':''}>Pending</option>
+            <option ${tc.status==='Pass'?'selected':''}>Pass</option>
+            <option ${tc.status==='Fail'?'selected':''}>Fail</option>
+          </select>
+          <button class="btn-delete" onclick="deleteTC(${tc.id})">Delete</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function updateStats() {
+    document.getElementById('totalCount').textContent = testCases.length;
+    document.getElementById('passCount').textContent = testCases.filter(t => t.status === 'Pass').length;
+    document.getElementById('failCount').textContent = testCases.filter(t => t.status === 'Fail').length;
+    document.getElementById('pendingCount').textContent = testCases.filter(t => t.status === 'Pending').length;
+  }
+</script>
+</body>
+</html>
