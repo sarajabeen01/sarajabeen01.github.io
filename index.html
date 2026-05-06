@@ -7,396 +7,76 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-  :root {
-    --bg: #0d0d0d;
-    --surface: #161616;
-    --card: #1c1c1c;
-    --accent: #c8a96e;
-    --accent2: #e8c99e;
-    --text: #f0ece4;
-    --muted: #888880;
-    --border: rgba(200,169,110,0.2);
-  }
-
+  :root { --bg: #0d0d0d; --card: #1c1c1c; --accent: #c8a96e; --accent2: #e8c99e; --text: #f0ece4; --muted: #888880; --border: rgba(200,169,110,0.2); }
   html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.7;
-    font-size: 16px;
-  }
-
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    padding: 1.2rem 2.5rem;
-    display: flex; justify-content: space-between; align-items: center;
-    background: rgba(13,13,13,0.92);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border);
-    z-index: 100;
-  }
-
-  .nav-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    color: var(--accent);
-    letter-spacing: 1px;
-  }
-
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; font-size: 16px; }
+  nav { position: fixed; top: 0; left: 0; right: 0; padding: 1.2rem 2.5rem; display: flex; justify-content: space-between; align-items: center; background: rgba(13,13,13,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 100; }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--accent); letter-spacing: 1px; }
   .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 0.85rem;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    transition: color 0.3s;
-  }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.3s; }
   .nav-links a:hover { color: var(--accent); }
-
   section { padding: 6rem 2.5rem; max-width: 900px; margin: 0 auto; }
-
-  .hero {
-    min-height: 100vh;
-    display: flex; flex-direction: column; justify-content: center;
-    padding-top: 6rem;
-    position: relative;
-  }
-
-  .hero-tag {
-    font-size: 0.78rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1.5rem;
-    display: flex; align-items: center; gap: 12px;
-  }
-  .hero-tag::before {
-    content: '';
-    display: block; width: 40px; height: 1px;
-    background: var(--accent);
-  }
-
-  h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(3rem, 8vw, 5.5rem);
-    line-height: 1.05;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-  }
-
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 6rem; position: relative; }
+  .hero-tag { font-size: 0.78rem; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 12px; }
+  .hero-tag::before { content: ''; display: block; width: 40px; height: 1px; background: var(--accent); }
+  h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 5.5rem); line-height: 1.05; font-weight: 700; margin-bottom: 1.5rem; }
   h1 span { color: var(--accent); }
-
-  .hero-desc {
-    font-size: 1.1rem;
-    color: var(--muted);
-    max-width: 520px;
-    margin-bottom: 2.5rem;
-    font-weight: 300;
-  }
-
+  .hero-desc { font-size: 1.1rem; color: var(--muted); max-width: 520px; margin-bottom: 2.5rem; font-weight: 300; }
   .btn-row { display: flex; gap: 1rem; flex-wrap: wrap; }
-
-  .btn {
-    padding: 0.8rem 2rem;
-    border-radius: 2px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.85rem;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: all 0.3s;
-    cursor: pointer;
-    border: none;
-  }
-
-  .btn-primary {
-    background: var(--accent);
-    color: #0d0d0d;
-    font-weight: 500;
-  }
+  .btn { padding: 0.8rem 2rem; border-radius: 2px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; transition: all 0.3s; cursor: pointer; border: none; }
+  .btn-primary { background: var(--accent); color: #0d0d0d; font-weight: 500; }
   .btn-primary:hover { background: var(--accent2); }
-
-  .btn-outline {
-    background: transparent;
-    color: var(--accent);
-    border: 1px solid var(--accent);
-  }
+  .btn-outline { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
   .btn-outline:hover { background: rgba(200,169,110,0.1); }
-
-  .scroll-line {
-    position: absolute; bottom: 3rem; left: 0;
-    display: flex; align-items: center; gap: 12px;
-    color: var(--muted); font-size: 0.75rem; letter-spacing: 2px;
-    text-transform: uppercase;
-    animation: fadeIn 2s ease 1s both;
-  }
-  .scroll-line::after {
-    content: '';
-    display: block; width: 60px; height: 1px;
-    background: var(--muted);
-    animation: growLine 1.5s ease 1.5s both;
-  }
-
-  @keyframes growLine { from { width: 0; } to { width: 60px; } }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .scroll-line { position: absolute; bottom: 3rem; left: 0; display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; }
+  .scroll-line::after { content: ''; display: block; width: 60px; height: 1px; background: var(--muted); }
   @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-
   .animate { animation: slideUp 0.7s ease both; }
-  .delay-1 { animation-delay: 0.1s; }
-  .delay-2 { animation-delay: 0.2s; }
-  .delay-3 { animation-delay: 0.3s; }
-  .delay-4 { animation-delay: 0.4s; }
-
-  .section-label {
-    font-size: 0.75rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.75rem;
-    display: flex; align-items: center; gap: 12px;
-  }
-  .section-label::before {
-    content: ''; display: block;
-    width: 30px; height: 1px; background: var(--accent);
-  }
-
-  h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    margin-bottom: 3rem;
-    line-height: 1.2;
-  }
-
-  .divider {
-    width: 100%; height: 1px;
-    background: var(--border);
-    margin: 0;
-  }
-
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-  }
-
-  .about-text p {
-    color: var(--muted);
-    margin-bottom: 1rem;
-    font-weight: 300;
-  }
-
-  .about-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-  }
-
-  .stat-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 1.5rem;
-  }
-
-  .stat-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
-    color: var(--accent);
-    line-height: 1;
-    margin-bottom: 0.3rem;
-  }
-
-  .stat-label {
-    font-size: 0.78rem;
-    color: var(--muted);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-
-  .skills-wrap {
-    display: flex; flex-wrap: wrap; gap: 0.75rem;
-  }
-
-  .skill-pill {
-    padding: 0.5rem 1.2rem;
-    border: 1px solid var(--border);
-    border-radius: 2px;
-    font-size: 0.85rem;
-    color: var(--muted);
-    transition: all 0.3s;
-    background: var(--card);
-  }
-  .skill-pill:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: rgba(200,169,110,0.08);
-  }
-
+  .delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; } .delay-3 { animation-delay: 0.3s; }
+  .section-label { font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 12px; }
+  .section-label::before { content: ''; display: block; width: 30px; height: 1px; background: var(--accent); }
+  h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 3rem; line-height: 1.2; }
+  .divider { width: 100%; height: 1px; background: var(--border); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .about-text p { color: var(--muted); margin-bottom: 1rem; font-weight: 300; }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 1.5rem; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--accent); line-height: 1; margin-bottom: 0.3rem; }
+  .stat-label { font-size: 0.78rem; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+  .skills-wrap { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .skill-pill { padding: 0.5rem 1.2rem; border: 1px solid var(--border); border-radius: 2px; font-size: 0.85rem; color: var(--muted); transition: all 0.3s; background: var(--card); }
+  .skill-pill:hover { border-color: var(--accent); color: var(--accent); background: rgba(200,169,110,0.08); }
   .skills-category { margin-bottom: 2rem; }
-  .skills-category h3 {
-    font-size: 0.78rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1rem;
-  }
-
-  .projects-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-  }
-
-  .project-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 2rem;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .project-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0;
-    width: 3px; height: 100%;
-    background: var(--accent);
-    transform: scaleY(0);
-    transition: transform 0.3s;
-  }
-
+  .skills-category h3 { font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+  .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .project-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 2rem; transition: all 0.3s; position: relative; overflow: hidden; }
+  .project-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--accent); transform: scaleY(0); transition: transform 0.3s; }
   .project-card:hover::before { transform: scaleY(1); }
   .project-card:hover { border-color: rgba(200,169,110,0.4); }
-
-  .project-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem;
-    color: rgba(200,169,110,0.12);
-    line-height: 1;
-    margin-bottom: 1rem;
-  }
-
-  .project-card h3 {
-    font-size: 1.1rem;
-    font-weight: 500;
-    margin-bottom: 0.75rem;
-    color: var(--text);
-  }
-
-  .project-card p {
-    font-size: 0.9rem;
-    color: var(--muted);
-    margin-bottom: 1.2rem;
-    line-height: 1.6;
-    font-weight: 300;
-  }
-
+  .project-num { font-family: 'Playfair Display', serif; font-size: 3rem; color: rgba(200,169,110,0.12); line-height: 1; margin-bottom: 1rem; }
+  .project-card h3 { font-size: 1.1rem; font-weight: 500; margin-bottom: 0.75rem; color: var(--text); }
+  .project-card p { font-size: 0.9rem; color: var(--muted); margin-bottom: 1.2rem; line-height: 1.6; font-weight: 300; }
   .tech-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-  .tech-tag {
-    font-size: 0.72rem;
-    padding: 0.25rem 0.6rem;
-    background: rgba(200,169,110,0.1);
-    color: var(--accent);
-    border-radius: 2px;
-    letter-spacing: 0.5px;
-  }
-
-  .achievement {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--border);
-    font-size: 0.82rem;
-    color: var(--accent);
-  }
-
+  .tech-tag { font-size: 0.72rem; padding: 0.25rem 0.6rem; background: rgba(200,169,110,0.1); color: var(--accent); border-radius: 2px; }
+  .achievement { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--accent); }
+  .achievement a { color: var(--accent); text-decoration: none; }
   .edu-list { display: flex; flex-direction: column; gap: 1.5rem; }
-
-  .edu-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 1.5rem 2rem;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: start;
-    gap: 1rem;
-    transition: border-color 0.3s;
-  }
+  .edu-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 1.5rem 2rem; display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 1rem; transition: border-color 0.3s; }
   .edu-card:hover { border-color: rgba(200,169,110,0.4); }
-
   .edu-card h3 { font-size: 1rem; font-weight: 500; margin-bottom: 0.3rem; }
   .edu-card .inst { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.2rem; }
   .edu-card .dates { font-size: 0.78rem; color: var(--muted); }
-
+  .edu-card .courses { font-size: 0.76rem; color: var(--muted); margin-top: 0.5rem; line-height: 1.6; }
   .edu-grade { text-align: right; }
-  .grade-val {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    color: var(--accent);
-  }
-  .grade-label {
-    font-size: 0.72rem;
-    color: var(--muted);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-
-  .contact-inner {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 3rem;
-    text-align: center;
-  }
-
-  .contact-inner p {
-    color: var(--muted);
-    margin-bottom: 2rem;
-    font-weight: 300;
-    max-width: 440px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .contact-links {
-    display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;
-  }
-
-  .contact-link {
-    display: flex; align-items: center; gap: 0.5rem;
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: color 0.3s;
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--border);
-    border-radius: 2px;
-  }
+  .grade-val { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--accent); }
+  .grade-label { font-size: 0.72rem; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+  .contact-inner { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 3rem; text-align: center; }
+  .contact-inner p { color: var(--muted); margin-bottom: 2rem; font-weight: 300; max-width: 440px; margin-left: auto; margin-right: auto; }
+  .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+  .contact-link { display: flex; align-items: center; gap: 0.5rem; color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; padding: 0.5rem 1rem; border: 1px solid var(--border); border-radius: 2px; }
   .contact-link:hover { color: var(--accent); border-color: var(--accent); }
-
-  footer {
-    text-align: center;
-    padding: 2rem;
-    color: var(--muted);
-    font-size: 0.8rem;
-    border-top: 1px solid var(--border);
-  }
-
-  @media (max-width: 640px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { gap: 1rem; }
-    section { padding: 4rem 1.5rem; }
-    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .edu-card { grid-template-columns: 1fr; }
-    .contact-inner { padding: 2rem 1.5rem; }
-  }
+  footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--border); }
+  @media (max-width: 640px) { nav { padding: 1rem 1.5rem; } .nav-links { gap: 1rem; } section { padding: 4rem 1.5rem; } .about-grid { grid-template-columns: 1fr; gap: 2rem; } .projects-grid { grid-template-columns: 1fr; } .edu-card { grid-template-columns: 1fr; } .contact-inner { padding: 2rem 1.5rem; } }
 </style>
 </head>
 <body>
@@ -413,12 +93,9 @@
 </nav>
 
 <section class="hero" id="home">
-  <div class="hero-tag animate">Software Engineer</div>
+  <div class="hero-tag animate">Software Engineer · SQA Enthusiast</div>
   <h1 class="animate delay-1">Sara<br><span>Jabeen</span></h1>
-  <p class="hero-desc animate delay-2">
-    Full-stack developer & Software Engineering student at UMT Lahore. 
-    Building intuitive web applications with a passion for clean code and user experience.
-  </p>
+  <p class="hero-desc animate delay-2">Software Engineering student at UMT Lahore with hands-on experience in full-stack web development, SQA tools, and database systems. Passionate about building quality software.</p>
   <div class="btn-row animate delay-3">
     <a href="#projects" class="btn btn-primary">View My Work</a>
     <a href="#contact" class="btn btn-outline">Get In Touch</a>
@@ -433,27 +110,15 @@
   <h2>About Me</h2>
   <div class="about-grid">
     <div class="about-text">
-      <p>I'm a 6th semester Software Engineering student at UMT Lahore with a strong foundation in full-stack web development and database systems.</p>
-      <p>I enjoy building applications that solve real-world problems — from expense management tools to healthcare systems.</p>
-      <p>Currently looking for internship opportunities to grow and contribute to a professional development team.</p>
+      <p>I'm a 6th semester Software Engineering student at UMT Lahore with a strong foundation in full-stack web development, database systems, and software quality assurance.</p>
+      <p>I enjoy building applications that solve real-world problems — from expense management tools to SQA tools like bug trackers and test case writers.</p>
+      <p>Currently looking for internship opportunities to grow and contribute to a professional QA or development team.</p>
     </div>
     <div class="about-stats">
-      <div class="stat-card">
-        <div class="stat-num">3.21</div>
-        <div class="stat-label">CGPA / 4.0</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">2+</div>
-        <div class="stat-label">Projects Built</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">6</div>
-        <div class="stat-label">Languages</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">'27</div>
-        <div class="stat-label">Graduating</div>
-      </div>
+      <div class="stat-card"><div class="stat-num">3.21</div><div class="stat-label">CGPA / 4.0</div></div>
+      <div class="stat-card"><div class="stat-num">4+</div><div class="stat-label">Projects Built</div></div>
+      <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">Languages</div></div>
+      <div class="stat-card"><div class="stat-num">'27</div><div class="stat-label">Graduating</div></div>
     </div>
   </div>
 </section>
@@ -463,40 +128,35 @@
 <section id="skills">
   <div class="section-label">What I Know</div>
   <h2>Skills</h2>
-
   <div class="skills-category">
     <h3>Languages</h3>
     <div class="skills-wrap">
-      <div class="skill-pill">HTML</div>
-      <div class="skill-pill">CSS</div>
-      <div class="skill-pill">JavaScript</div>
-      <div class="skill-pill">Python</div>
-      <div class="skill-pill">C / C++</div>
-      <div class="skill-pill">SQL</div>
+      <div class="skill-pill">HTML</div><div class="skill-pill">CSS</div>
+      <div class="skill-pill">JavaScript</div><div class="skill-pill">Python</div>
+      <div class="skill-pill">C / C++</div><div class="skill-pill">SQL</div>
     </div>
   </div>
-
+  <div class="skills-category">
+    <h3>Testing & QA</h3>
+    <div class="skills-wrap">
+      <div class="skill-pill">Manual Testing</div><div class="skill-pill">Bug Reporting</div>
+      <div class="skill-pill">Test Case Writing</div><div class="skill-pill">Bug Lifecycle Management</div>
+    </div>
+  </div>
   <div class="skills-category">
     <h3>Tools & Technologies</h3>
     <div class="skills-wrap">
-      <div class="skill-pill">MySQL</div>
-      <div class="skill-pill">VS Code</div>
-      <div class="skill-pill">Figma</div>
-      <div class="skill-pill">Git & GitHub</div>
-      <div class="skill-pill">Draw.io</div>
-      <div class="skill-pill">Trello</div>
+      <div class="skill-pill">MySQL</div><div class="skill-pill">VS Code</div>
+      <div class="skill-pill">Git & GitHub</div><div class="skill-pill">Figma</div>
+      <div class="skill-pill">Draw.io</div><div class="skill-pill">Trello</div><div class="skill-pill">MS Excel</div>
     </div>
   </div>
-
   <div class="skills-category">
     <h3>Concepts</h3>
     <div class="skills-wrap">
-      <div class="skill-pill">OOP</div>
-      <div class="skill-pill">Web Development</div>
-      <div class="skill-pill">Database Design</div>
-      <div class="skill-pill">Agile Development</div>
-      <div class="skill-pill">Software Engineering</div>
-      <div class="skill-pill">Machine Learning</div>
+      <div class="skill-pill">OOP</div><div class="skill-pill">Web Development</div>
+      <div class="skill-pill">Database Design</div><div class="skill-pill">Agile Development</div>
+      <div class="skill-pill">Software Engineering</div><div class="skill-pill">Machine Learning</div>
     </div>
   </div>
 </section>
@@ -509,40 +169,31 @@
   <div class="projects-grid">
     <div class="project-card">
       <div class="project-num">01</div>
-      <h3>Budget Tracker</h3>
-      <p>A full-stack expense management app with dynamic category-based tracking, real-time balance updates, and monthly summary reports.</p>
-      <div class="tech-tags">
-        <span class="tech-tag">HTML</span>
-        <span class="tech-tag">CSS</span>
-        <span class="tech-tag">JavaScript</span>
-        <span class="tech-tag">Python</span>
-        <span class="tech-tag">MySQL</span>
-      </div>
-      <div class="achievement">Complete SRS documentation & UI wireframes</div>
+      <h3>Bug Tracker — SQA Tool</h3>
+      <p>Web-based bug tracking system simulating real SQA workflow with complete bug lifecycle management and severity classification (Critical, Major, Minor).</p>
+      <div class="tech-tags"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span></div>
+      <div class="achievement"><a href="bug-tracker.html">Live Demo →</a></div>
     </div>
-   <div class="project-card">
-          <div class="project-num">03</div>
-          <h3>Bug Tracker — SQA Tool</h3>
-          <p>A web-based bug tracking system simulating real SQA workflow with bug lifecycle management and severity classification.</p>
-          <div class="tech-tags">
-            <span class="tech-tag">HTML</span>
-            <span class="tech-tag">CSS</span>
-            <span class="tech-tag">JavaScript</span>
-          </div>
-          <div class="achievement"><a href="bug-tracker.html" style="color:inherit">Live Demo →</a></div>
-        </div>
-
     <div class="project-card">
       <div class="project-num">02</div>
+      <h3>Test Case Writer — SQA Tool</h3>
+      <p>Test case management tool to write, track and manage test cases with Pass/Fail/Pending status and type classification (Functional, UI, Security).</p>
+      <div class="tech-tags"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span></div>
+      <div class="achievement"><a href="test-case-writer.html">Live Demo →</a></div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">03</div>
+      <h3>Budget Tracker</h3>
+      <p>Full-stack expense management app with dynamic category-based tracking, real-time balance updates, monthly summary reports and complete SRS documentation.</p>
+      <div class="tech-tags"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span><span class="tech-tag">Python</span><span class="tech-tag">MySQL</span></div>
+      <div class="achievement">Complete SRS documentation & UI wireframes</div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">04</div>
       <h3>Blood Donation System</h3>
-      <p>A community health platform for donor matching and real-time blood bank inventory tracking. Reduced request response time by 50%.</p>
-      <div class="tech-tags">
-        <span class="tech-tag">HTML</span>
-        <span class="tech-tag">CSS</span>
-        <span class="tech-tag">Python</span>
-        <span class="tech-tag">MySQL</span>
-      </div>
-      <div class="achievement">100+ donors registered · 5 blood banks simulated</div>
+      <p>Community health platform for donor matching and real-time blood bank inventory tracking. Reduced request response time by 50%.</p>
+      <div class="tech-tags"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">Python</span><span class="tech-tag">MySQL</span></div>
+      <div class="achievement">100+ donors · 5 blood banks simulated</div>
     </div>
   </div>
 </section>
@@ -558,11 +209,9 @@
         <h3>Bachelors in Software Engineering</h3>
         <div class="inst">University of Management & Technology (UMT) — Lahore</div>
         <div class="dates">Oct 2023 – July 2027</div>
+        <div class="courses">Relevant Courses: OOP, Data Structures, Database Systems, Operating Systems, Computer Networks, Software Engineering, Machine Learning, Artificial Intelligence</div>
       </div>
-      <div class="edu-grade">
-        <div class="grade-val">3.21</div>
-        <div class="grade-label">CGPA</div>
-      </div>
+      <div class="edu-grade"><div class="grade-val">3.21</div><div class="grade-label">CGPA</div></div>
     </div>
     <div class="edu-card">
       <div>
@@ -570,10 +219,7 @@
         <div class="inst">LCWU — Lahore</div>
         <div class="dates">Aug 2019 – July 2021</div>
       </div>
-      <div class="edu-grade">
-        <div class="grade-val">83%</div>
-        <div class="grade-label">A+ Grade</div>
-      </div>
+      <div class="edu-grade"><div class="grade-val">83%</div><div class="grade-label">A+ Grade</div></div>
     </div>
     <div class="edu-card">
       <div>
@@ -581,10 +227,7 @@
         <div class="inst">The Punjab School</div>
         <div class="dates">Completed 2019</div>
       </div>
-      <div class="edu-grade">
-        <div class="grade-val">94%</div>
-        <div class="grade-label">Score</div>
-      </div>
+      <div class="edu-grade"><div class="grade-val">94%</div><div class="grade-label">Score</div></div>
     </div>
   </div>
 </section>
@@ -595,27 +238,17 @@
   <div class="section-label">Say Hello</div>
   <h2>Get In Touch</h2>
   <div class="contact-inner">
-    <p>I'm currently open to internship opportunities and collaboration. Feel free to reach out!</p>
+    <p>I'm currently open to internship opportunities in SQA and software development. Feel free to reach out!</p>
     <div class="contact-links">
-      <a href="mailto:saraahmir73@gmail.com" class="contact-link">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        saraahmir73@gmail.com
-      </a>
-      <a href="https://linkedin.com/in/saraa-mir-31a6503" target="_blank" class="contact-link">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-        LinkedIn
-      </a>
-      <a href="https://github.com/sarajabeen01" target="_blank" class="contact-link">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-        GitHub
-      </a>
+      <a href="tel:03324155547" class="contact-link">📞 0332-4155547</a>
+      <a href="mailto:sarajabeen.dev@gmail.com" class="contact-link">✉️ sarajabeen.dev@gmail.com</a>
+      <a href="https://linkedin.com/in/saraa-mir-31a6503" target="_blank" class="contact-link">💼 LinkedIn</a>
+      <a href="https://github.com/sarajabeen01" target="_blank" class="contact-link">💻 GitHub</a>
     </div>
   </div>
 </section>
 
-<footer>
-  Designed & built by Sara Jabeen · 2025
-</footer>
+<footer>Designed & built by Sara Jabeen · 2026</footer>
 
 </body>
 </html>
