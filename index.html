@@ -60,6 +60,12 @@
   .tech-tag { font-size: 0.72rem; padding: 0.25rem 0.6rem; background: rgba(200,169,110,0.1); color: var(--accent); border-radius: 2px; }
   .achievement { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--accent); }
   .achievement a { color: var(--accent); text-decoration: none; }
+  .achievement a:hover { color: var(--accent2); }
+  /* SQA Testing cards — full width */
+  .project-card.full { grid-column: span 2; }
+  .testing-results { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 1rem; }
+  .result-item { background: rgba(200,169,110,0.08); border: 1px solid var(--border); border-radius: 2px; padding: 0.6rem 1rem; font-size: 0.8rem; color: var(--muted); }
+  .result-item strong { color: var(--accent); display: block; font-size: 1rem; font-family: 'Playfair Display', serif; }
   .edu-list { display: flex; flex-direction: column; gap: 1.5rem; }
   .edu-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 1.5rem 2rem; display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 1rem; transition: border-color 0.3s; }
   .edu-card:hover { border-color: rgba(200,169,110,0.4); }
@@ -76,7 +82,15 @@
   .contact-link { display: flex; align-items: center; gap: 0.5rem; color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; padding: 0.5rem 1rem; border: 1px solid var(--border); border-radius: 2px; }
   .contact-link:hover { color: var(--accent); border-color: var(--accent); }
   footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--border); }
-  @media (max-width: 640px) { nav { padding: 1rem 1.5rem; } .nav-links { gap: 1rem; } section { padding: 4rem 1.5rem; } .about-grid { grid-template-columns: 1fr; gap: 2rem; } .projects-grid { grid-template-columns: 1fr; } .edu-card { grid-template-columns: 1fr; } .contact-inner { padding: 2rem 1.5rem; } }
+  @media (max-width: 640px) {
+    nav { padding: 1rem 1.5rem; } .nav-links { gap: 1rem; } section { padding: 4rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card.full { grid-column: span 1; }
+    .edu-card { grid-template-columns: 1fr; }
+    .contact-inner { padding: 2rem 1.5rem; }
+    .testing-results { gap: 0.75rem; }
+  }
 </style>
 </head>
 <body>
@@ -92,10 +106,11 @@
   </ul>
 </nav>
 
+<!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-tag animate">Software Engineer · SQA Enthusiast</div>
   <h1 class="animate delay-1">Sara<br><span>Jabeen</span></h1>
-  <p class="hero-desc animate delay-2">Software Engineering student at UMT Lahore with hands-on experience in full-stack web development, SQA tools, and database systems. Passionate about building quality software.</p>
+  <p class="hero-desc animate delay-2">Software Engineering student at UMT Lahore (6th semester, CGPA 3.21) with hands-on experience in manual testing, accessibility auditing, bug lifecycle management, and full-stack web development.</p>
   <div class="btn-row animate delay-3">
     <a href="#projects" class="btn btn-primary">View My Work</a>
     <a href="#contact" class="btn btn-outline">Get In Touch</a>
@@ -105,19 +120,20 @@
 
 <div class="divider"></div>
 
+<!-- ABOUT -->
 <section id="about">
   <div class="section-label">Who I Am</div>
   <h2>About Me</h2>
   <div class="about-grid">
     <div class="about-text">
-      <p>I'm a 6th semester Software Engineering student at UMT Lahore with a strong foundation in full-stack web development, database systems, and software quality assurance.</p>
-      <p>I enjoy building applications that solve real-world problems — from expense management tools to SQA tools like bug trackers and test case writers.</p>
-      <p>Currently looking for internship opportunities to grow and contribute to a professional QA or development team.</p>
+      <p>I'm a 6th semester Software Engineering student at UMT Lahore with a strong foundation in software quality assurance, full-stack web development, and database systems.</p>
+      <p>I've independently conducted accessibility audits and manual testing case studies on real-world platforms (Foodpanda, Google), and built complete SQA tools — bug trackers, test case dashboards, and QA reporting systems.</p>
+      <p>Currently looking for remote internship opportunities in SQA or software development where I can contribute and grow in a professional team.</p>
     </div>
     <div class="about-stats">
       <div class="stat-card"><div class="stat-num">3.21</div><div class="stat-label">CGPA / 4.0</div></div>
-      <div class="stat-card"><div class="stat-num">4+</div><div class="stat-label">Projects Built</div></div>
-      <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">Languages</div></div>
+      <div class="stat-card"><div class="stat-num">5+</div><div class="stat-label">Projects Built</div></div>
+      <div class="stat-card"><div class="stat-num">80%</div><div class="stat-label">Avg Pass Rate</div></div>
       <div class="stat-card"><div class="stat-num">'27</div><div class="stat-label">Graduating</div></div>
     </div>
   </div>
@@ -125,6 +141,7 @@
 
 <div class="divider"></div>
 
+<!-- SKILLS -->
 <section id="skills">
   <div class="section-label">What I Know</div>
   <h2>Skills</h2>
@@ -139,8 +156,13 @@
   <div class="skills-category">
     <h3>Testing & QA</h3>
     <div class="skills-wrap">
-      <div class="skill-pill">Manual Testing</div><div class="skill-pill">Bug Reporting</div>
-      <div class="skill-pill">Test Case Writing</div><div class="skill-pill">Bug Lifecycle Management</div>
+      <div class="skill-pill">Manual Testing</div>
+      <div class="skill-pill">Accessibility Testing</div>
+      <div class="skill-pill">Web Application Testing</div>
+      <div class="skill-pill">Bug Reporting</div>
+      <div class="skill-pill">Test Case Design</div>
+      <div class="skill-pill">Bug Lifecycle Management</div>
+      <div class="skill-pill">SQA Documentation</div>
     </div>
   </div>
   <div class="skills-category">
@@ -148,68 +170,113 @@
     <div class="skills-wrap">
       <div class="skill-pill">MySQL</div><div class="skill-pill">VS Code</div>
       <div class="skill-pill">Git & GitHub</div><div class="skill-pill">Figma</div>
-      <div class="skill-pill">Draw.io</div><div class="skill-pill">Trello</div><div class="skill-pill">MS Excel</div>
+      <div class="skill-pill">Draw.io</div><div class="skill-pill">Trello</div>
+      <div class="skill-pill">MS Excel</div>
     </div>
   </div>
   <div class="skills-category">
     <h3>Concepts</h3>
     <div class="skills-wrap">
       <div class="skill-pill">OOP</div><div class="skill-pill">Web Development</div>
-      <div class="skill-pill">Database Design</div><div class="skill-pill">Agile Development</div>
-      <div class="skill-pill">Software Engineering</div><div class="skill-pill">Machine Learning</div>
+      <div class="skill-pill">Database Design</div><div class="skill-pill">Agile / Scrum</div>
+      <div class="skill-pill">Software Engineering</div><div class="skill-pill">Basic UI/UX</div>
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
+<!-- PROJECTS -->
 <section id="projects">
   <div class="section-label">What I've Built</div>
   <h2>Projects</h2>
   <div class="projects-grid">
-    <div class="project-card">
+
+    <!-- 01 SQA Dashboard — FEATURED -->
+    <div class="project-card full">
       <div class="project-num">01</div>
-      <h3>Bug Tracker — SQA Tool</h3>
-      <p>Web-based bug tracking system simulating real SQA workflow with complete bug lifecycle management and severity classification (Critical, Major, Minor).</p>
-      <div class="tech-tags"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span></div>
-      <div class="achievement"><a href="bug-tracker.html">Live Demo →</a></div>
+      <h3>SQA Test Management Dashboard</h3>
+      <p>Complete SQA dashboard with integrated test case management, bug tracking, and automated report generation — simulating a real QA team workflow across 3 modules. Built real-time visual charts showing pass/fail rates and bug severity breakdown, cutting manual reporting effort by ~60%.</p>
+      <div class="tech-tags">
+        <span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span>
+        <span class="tech-tag">Sole Contributor</span>
+      </div>
+      <div class="testing-results">
+        <div class="result-item"><strong>5</strong>Test Cases Written</div>
+        <div class="result-item"><strong>80%</strong>Pass Rate</div>
+        <div class="result-item"><strong>2</strong>Bugs Logged</div>
+        <div class="result-item"><strong>~60%</strong>Less Reporting Effort</div>
+      </div>
+      <div class="achievement"><a href="https://sarajabeen01.github.io/sqa-dashboard.html" target="_blank">Live Demo &rarr;</a></div>
     </div>
+
+    <!-- 02 Foodpanda Accessibility -->
     <div class="project-card">
       <div class="project-num">02</div>
-      <h3>Test Case Writer — SQA Tool</h3>
-      <p>Test case management tool to write, track and manage test cases with Pass/Fail/Pending status and type classification (Functional, UI, Security).</p>
-      <div class="tech-tags"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span></div>
-      <div class="achievement"><a href="test-case-writer.html">Live Demo →</a></div>
+      <h3>Accessibility Audit — Foodpanda.pk</h3>
+      <p>Self-initiated case study (not affiliated). Independent manual accessibility audit covering 6 dimensions: keyboard navigation, color contrast, alt labels, font readability, and screen reader compatibility. Compiled a 10-page QA report with severity classification.</p>
+      <div class="tech-tags">
+        <span class="tech-tag">Manual Testing</span><span class="tech-tag">Accessibility</span><span class="tech-tag">MS Excel</span>
+      </div>
+      <div class="testing-results" style="flex-direction:column;gap:0.4rem;">
+        <span style="font-size:0.8rem;color:var(--muted);">5 test cases &nbsp;·&nbsp; 60% pass rate &nbsp;·&nbsp; 1 Critical bug found</span>
+      </div>
+      <div class="achievement">10-page QA Report with Recommendations</div>
     </div>
+
+    <!-- 03 Google Manual Testing -->
     <div class="project-card">
       <div class="project-num">03</div>
-      <h3>Budget Tracker</h3>
-      <p>Full-stack expense management app with dynamic category-based tracking, real-time balance updates, monthly summary reports and complete SRS documentation.</p>
-      <div class="tech-tags"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span><span class="tech-tag">Python</span><span class="tech-tag">MySQL</span></div>
-      <div class="achievement">Complete SRS documentation & UI wireframes</div>
+      <h3>Manual Testing — Google.com</h3>
+      <p>Self-initiated case study (not affiliated). End-to-end manual testing across 6 features — homepage, search, filters, image search, voice search, and security checks — covering 20+ test scenarios.</p>
+      <div class="tech-tags">
+        <span class="tech-tag">Manual Testing</span><span class="tech-tag">Bug Reporting</span><span class="tech-tag">Test Cases</span>
+      </div>
+      <div class="testing-results" style="flex-direction:column;gap:0.4rem;">
+        <span style="font-size:0.8rem;color:var(--muted);">5 test cases &nbsp;·&nbsp; 80% pass rate &nbsp;·&nbsp; 1 validation bug found</span>
+      </div>
+      <div class="achievement">Structured QA Report with Reproduction Steps</div>
     </div>
+
+    <!-- 04 Bug Tracker -->
     <div class="project-card">
       <div class="project-num">04</div>
-      <h3>Blood Donation System</h3>
-      <p>Community health platform for donor matching and real-time blood bank inventory tracking. Reduced request response time by 50%.</p>
-      <div class="tech-tags"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">Python</span><span class="tech-tag">MySQL</span></div>
-      <div class="achievement">100+ donors · 5 blood banks simulated</div>
+      <h3>Bug Tracker — SQA Tool</h3>
+      <p>Web-based bug tracking system with full 3-stage lifecycle (Open &rarr; In Progress &rarr; Resolved) and 3-tier severity classification. Cut simulated resolution time by 40% through real-time status updates and priority-based filtering.</p>
+      <div class="tech-tags">
+        <span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span>
+      </div>
+      <div class="achievement"><a href="bug-tracker.html">Live Demo &rarr;</a></div>
     </div>
+
+    <!-- 05 Budget Tracker -->
+    <div class="project-card">
+      <div class="project-num">05</div>
+      <h3>Budget Tracker</h3>
+      <p>Full-stack expense management app with category-based tracking, real-time balance updates, and monthly summary reports. Designed 8+ Figma wireframes, authored complete SRS documentation (10+ requirements), and delivered via 3 Agile sprints in 4 weeks.</p>
+      <div class="tech-tags">
+        <span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span>
+        <span class="tech-tag">Python</span><span class="tech-tag">MySQL</span><span class="tech-tag">Figma</span>
+      </div>
+      <div class="achievement">SRS Documentation · ER Diagrams · Agile Sprints</div>
+    </div>
+
   </div>
 </section>
 
 <div class="divider"></div>
 
+<!-- EDUCATION -->
 <section id="education">
   <div class="section-label">My Background</div>
   <h2>Education</h2>
   <div class="edu-list">
     <div class="edu-card">
       <div>
-        <h3>Bachelors in Software Engineering</h3>
-        <div class="inst">University of Management & Technology (UMT) — Lahore</div>
-        <div class="dates">Oct 2023 – July 2027</div>
-        <div class="courses">Relevant Courses: OOP, Data Structures, Database Systems, Operating Systems, Computer Networks, Software Engineering, Machine Learning, Artificial Intelligence</div>
+        <h3>Bachelor of Science in Software Engineering</h3>
+        <div class="inst">University of Management &amp; Technology (UMT) — Lahore</div>
+        <div class="dates">Oct 2023 – July 2027 &nbsp;·&nbsp; 6th Semester</div>
+        <div class="courses">Relevant Courses: OOP, Data Structures, Database Systems, Operating Systems, Computer Networks, Software Engineering, Machine Learning, Artificial Intelligence, Software Design &amp; Architecture</div>
       </div>
       <div class="edu-grade"><div class="grade-val">3.21</div><div class="grade-label">CGPA</div></div>
     </div>
@@ -234,21 +301,22 @@
 
 <div class="divider"></div>
 
+<!-- CONTACT -->
 <section id="contact">
   <div class="section-label">Say Hello</div>
   <h2>Get In Touch</h2>
   <div class="contact-inner">
-    <p>I'm currently open to internship opportunities in SQA and software development. Feel free to reach out!</p>
+    <p>I'm currently open to remote internship opportunities in SQA and software development. Feel free to reach out!</p>
     <div class="contact-links">
-      <a href="tel:03324155547" class="contact-link">📞 0332-4155547</a>
-      <a href="mailto:sarajabeen.dev@gmail.com" class="contact-link">✉️ sarajabeen.dev@gmail.com</a>
-      <a href="https://linkedin.com/in/saraa-mir-31a6503" target="_blank" class="contact-link">💼 LinkedIn</a>
-      <a href="https://github.com/sarajabeen01" target="_blank" class="contact-link">💻 GitHub</a>
+      <a href="tel:03324155547" class="contact-link">&#128222; 0332-4155547</a>
+      <a href="mailto:sarajabeen.dev@gmail.com" class="contact-link">&#9993;&#65039; sarajabeen.dev@gmail.com</a>
+      <a href="https://linkedin.com/in/saraa-mir-31a6503" target="_blank" class="contact-link">&#128188; LinkedIn</a>
+      <a href="https://github.com/sarajabeen01" target="_blank" class="contact-link">&#128187; GitHub</a>
     </div>
   </div>
 </section>
 
-<footer>Designed & built by Sara Jabeen · 2026</footer>
+<footer>Designed &amp; built by Sara Jabeen &nbsp;·&nbsp; 2026</footer>
 
 </body>
 </html>
